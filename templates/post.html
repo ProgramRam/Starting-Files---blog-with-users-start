@@ -36,9 +36,13 @@
 
 <!--           Comments Area -->
           <div class="col-lg-8 col-md-10 mx-auto comment">
+            {% if current_user.is_authenticated %}
             {{ ckeditor.load() }}
             {{ ckeditor.config(name='comment') }}
             {{ wtf.quick_form(form, novalidate=True, button_map={"submit": "primary"}) }}
+            {% else %}
+            <p>Log in or Register to comment</p>
+            {% endif %}
             <ul class="commentList">
               {% for comment in post.comments[::-1] %}
               <li>
